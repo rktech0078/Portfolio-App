@@ -4,6 +4,7 @@ export default function Home(){
       <div>
         <h1>Home</h1>
         <p>Aqua Di Geo</p>
+        <h1>HILOO</h1>
       </div>
     </div>
   )
