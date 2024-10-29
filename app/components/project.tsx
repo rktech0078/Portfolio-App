@@ -26,7 +26,7 @@ const Project = () => {
           <Image
             alt="projects"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            src={require("../../public/assests/projects/project-2.png")}
+            src={require("../../public/assests/projects/project-2.jpg")}
           />
           <div
             className="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100"
@@ -58,7 +58,7 @@ const Project = () => {
           <Image
             alt="projects"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            src={require("../../public/assests/projects/resume.png")}
+            src={require("../../public/assests/projects/resume.jpg")}
           />
           <div
             className="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100"
@@ -90,7 +90,7 @@ const Project = () => {
           <Image
             alt="projects"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            src={require("../../public/assests/projects/project-4.png")}
+            src={require("../../public/assests/projects/project-4.jpg")}
           />
           <div
             className="px-8 py-10 relative z-10 w-full border-4 border-gray-200 bg-white opacity-0 hover:opacity-100"
