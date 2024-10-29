@@ -15,7 +15,7 @@ const Project = () => {
         My Portfolio Projects
       </h1>
       <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-        ChatGPT said that: "A project is the bridge between vision and reality, built one step at a time with passion, precision, and purpose."
+        ChatGPT said that:  A project is the bridge between vision and reality, built one step at a time with passion, precision, and purpose.
       </p>
     </div>
     <div className="flex flex-wrap -m-4">

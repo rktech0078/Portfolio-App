@@ -1,7 +1,6 @@
 import React from 'react'
 import { VscAccount } from "react-icons/vsc";
 import { FaLaptopCode } from "react-icons/fa6";
-import { AiFillCode } from "react-icons/ai";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { FaReact } from "react-icons/fa";
 import Link from 'next/link';
@@ -39,7 +38,7 @@ const About = () => {
                             AI, Metaverse, Web 3.0 and
                             block chain courses from
                             Governor Sindh Initiative
-                            Onsite (I'm doing it now).
+                            Onsite (I am doing it now).
                         </p>
 
                         <Link href={"/assests/CV/my-cv.pdf"} target='_blank'>

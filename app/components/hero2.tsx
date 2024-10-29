@@ -2,7 +2,6 @@
 import Image from 'next/image'
 import Link from 'next/link';
 import React from 'react'
-import { AiFillAlert } from "react-icons/ai";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import Typewriter from 'typewriter-effect';
 
