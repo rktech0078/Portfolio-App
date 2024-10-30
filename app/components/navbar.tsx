@@ -36,15 +36,15 @@ const Navbar = () => {
             <span className="ml-3 text-xl hover:text-[#ffc107] font-bold">My Portfolio</span>
           </Link>
           <nav className="md:ml-auto md:mr-auto flex-wrap items-center text-base justify-center space-x-10 hidden sm:block">
-            <Link href={"/"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline">Home</Link>
-            <Link href={"#about"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline">About</Link>
-            <Link href={"#skills"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline">Skills</Link>
-            <Link href={"#projects"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline">Projects</Link>
-            <Link href={"#contact"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline">Contact</Link>
+            <Link href={"/"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">Home</Link>
+            <Link href={"#about"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">About</Link>
+            <Link href={"#skills"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">Skills</Link>
+            <Link href={"#projects"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">Projects</Link>
+            <Link href={"#contact"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">Contact</Link>
           </nav>
 
           <a href="/assests/CV/my-cv.pdf" target='_blank'>
-            <button className="inline-flex items-center bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-[#ffc107] ... border-0 py-1 px-3 focus:outline-none rounded-xl text-base font-bold text-white mt-4 md:mt-0">
+            <button className="inline-flex items-center bg-gradient-to-r from-teal-400 to-blue-500 hover:from-pink-500 hover:to-[#ffc107] ... border-0 py-1 px-3 focus:outline-none rounded-xl text-base font-bold text-white mt-4 md:mt-0 shadow-md hover:shadow-xl transition-shadow duration-300">
               Download CV
               <AiOutlineCloudDownload className='text-[23px] ml-2 text-white font-bold ' />
             </button>

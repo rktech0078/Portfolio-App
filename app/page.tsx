@@ -4,7 +4,6 @@ import Contact from "./components/contact";
 import Hero2 from "./components/hero2";
 import Project from "./components/project";
 import Skills from "./components/skills";
-
 export default function Home(){
   return(
     <div>
@@ -16,3 +15,7 @@ export default function Home(){
     </div>
   )
 }
+
+
+
+

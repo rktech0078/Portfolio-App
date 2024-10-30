@@ -42,7 +42,7 @@ const About = () => {
                         </p>
 
                         <Link href={"/assests/CV/my-cv.pdf"} target='_blank'>
-                        <button className="inline-flex items-center bg-[#ffc107] hover:bg-black border-0 py-1 px-3 focus:outline-none rounded-xl font-bold text-white  md:mt-0 text-lg m-16 mt-20">
+                        <button className="inline-flex items-center bg-[#ffc107] hover:bg-black border-0 py-1 px-3 focus:outline-none rounded-xl font-bold text-white  md:mt-0 text-lg m-16 mt-20 shadow-xl hover:shadow-2xl transition-shadow duration-500">
                             View CV
                             <VscAccount className='w-14 h-6'/> 
                         </button>
@@ -62,11 +62,11 @@ const About = () => {
                     <div className="flex flex-wrap -m-4" >
                         <div className="p-4 lg:w-1/2 md:w-full" >
                             <div
-                                className="bg-slate-100 flex border-2 rounded-lg cursor-pointer border-gray-200 hover:border-gray-400 border-opacity-50 p-8 sm:flex-row flex-col"
+                                className="bg-slate-100 flex border-2 rounded-lg cursor-pointer border-gray-200 hover:border-gray-400 border-opacity-50 p-8 sm:flex-row flex-col shadow-md hover:shadow-xl transition-shadow duration-300"
 
                             >
                                 <div
-                                    className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-yellow-100 text-yellow-500 flex-shrink-0"
+                                    className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-yellow-100 text-yellow-500 flex-shrink-0 "
 
                                 >
                                     <FaLaptopCode className='text-4xl'/>
@@ -89,7 +89,7 @@ const About = () => {
                         </div>
                         <div className="p-4 lg:w-1/2 md:w-full w-full" >
                             <div
-                                className="bg-slate-100 flex border-2 rounded-lg border-gray-200 hover:border-gray-400 cursor-pointer border-opacity-50 p-8 sm:flex-row flex-col"
+                                className="bg-slate-100 flex border-2 rounded-lg border-gray-200 hover:border-gray-400 cursor-pointer border-opacity-50 p-8 sm:flex-row flex-col shadow-md hover:shadow-xl transition-shadow duration-300"
 
                             >
                                 <div

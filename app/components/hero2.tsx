@@ -45,7 +45,7 @@ const Hero2 = () => {
       <div className="flex justify-center">
 
         <Link href={"https://www.linkedin.com/in/abdul-rafay-khan-2780b12b5/"} target='_' className='font-bold'>
-        <button className="inline-flex text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-purple-500 hover:to-pink-500 border-0 py-2 px-6 focus:outline-none rounded-xl text-lg ">
+        <button className="inline-flex text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-purple-500 hover:to-pink-500 border-0 py-2 px-6 focus:outline-none rounded-xl text-lg shadow-md hover:shadow-xl transition-shadow duration-300">
           Hire Me
           <FaArrowUpRightFromSquare className='m-1 text-[17px] ml-3'/>
         </button>

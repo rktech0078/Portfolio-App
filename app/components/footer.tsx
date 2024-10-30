@@ -32,7 +32,7 @@ const Footer = () => {
                     </p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                         <Link href={"https://www.facebook.com/profile.php?id=100051895934107"} target='_blank' className="text-gray-500">
-                            <FaFacebook className='w-6 h-6 hover:text-[#1877F2]' />
+                            <FaFacebook className='w-6 h-6 hover:text-[#1877F2] ' />
                         </Link>
                         <Link href={'https://github.com/rktech0078'} target='_blank' className="ml-3 text-gray-500">
                             <FaGithub className='w-6 h-6 hover:text-[#a956d0]' />

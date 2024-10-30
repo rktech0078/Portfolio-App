@@ -26,9 +26,9 @@ const Skills = () => {
     <div className="flex flex-wrap -m-4 " >
 
         {/* skill 1 */}
-      <div className="p-4 w-[100%] md:w-1/3" >
+      <div className="p-4 w-[100%] md:w-1/3 " >
         <div
-          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col "
+          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col shadow-md hover:shadow-xl transition-shadow duration-300"
           
         >
           <div className="flex items-center mb-3 " >
@@ -56,7 +56,7 @@ const Skills = () => {
         {/* skill 2 */}
       <div className="p-4 w-[100%] md:w-1/3" >
         <div
-          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col"
+          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col shadow-md hover:shadow-xl transition-shadow duration-300"
           
         >
           <div className="flex items-center mb-3" >
@@ -84,7 +84,7 @@ const Skills = () => {
       {/* skill 3 */}
       <div className="p-4 w-[100%] md:w-1/3" >
         <div
-          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col"
+          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col shadow-md hover:shadow-xl transition-shadow duration-300"
           
         >
           <div className="flex items-center mb-3" >
@@ -112,7 +112,7 @@ const Skills = () => {
       {/* skill 4 */}
       <div className="p-4 w-[100%] md:w-1/3" >
         <div
-          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col"
+          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col shadow-md hover:shadow-xl transition-shadow duration-300"
           
         >
           <div className="flex items-center mb-3" >
@@ -140,7 +140,7 @@ const Skills = () => {
         {/* skil 5 */}
       <div className="p-4 w-[100%] md:w-1/3" >
         <div
-          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col"
+          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col shadow-md hover:shadow-xl transition-shadow duration-300"
           
         >
           <div className="flex items-center mb-3" >
@@ -168,7 +168,7 @@ const Skills = () => {
       {/* skil 6 */}
       <div className="p-4 w-[100%] md:w-1/3" >
         <div
-          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col"
+          className="flex rounded-lg h-full bg-gray-100 p-8 flex-col shadow-md hover:shadow-xl transition-shadow duration-300"
           
         >
           <div className="flex items-center mb-3" >

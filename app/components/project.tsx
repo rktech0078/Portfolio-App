@@ -21,8 +21,8 @@ const Project = () => {
     <div className="flex flex-wrap -m-4">
 
       {/* Project 1 */}
-      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer">
-        <div className="flex relative">
+      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div className="flex relative ">
           <Image
             alt="projects"
             className="absolute inset-0 w-full h-full object-cover object-center"
@@ -53,7 +53,7 @@ const Project = () => {
       </div>
 
       {/* Project 2 */}
-      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer">
+      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
         <div className="flex relative">
           <Image
             alt="projects"
@@ -85,7 +85,7 @@ const Project = () => {
       </div>
 
       {/* Project 3 */}
-      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer">
+      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
         <div className="flex relative">
           <Image
             alt="projects"
@@ -117,7 +117,7 @@ const Project = () => {
       </div>
 
       {/* Project 4 */}
-      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer">
+      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
         <div className="flex relative">
           <Image
             alt="projects"
@@ -149,7 +149,7 @@ const Project = () => {
       </div>
 
       {/* Project 5 */}
-      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer">
+      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
         <div className="flex relative">
           <Image
             alt="projects"
@@ -183,7 +183,7 @@ const Project = () => {
       </div>
 
       {/* Project 6 */}
-      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer">
+      <div className="lg:w-1/3 sm:w-1/2 p-4 cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300">
         <div className="flex relative">
           <Image
             alt="projects"

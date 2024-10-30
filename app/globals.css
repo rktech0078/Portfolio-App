@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Custom text shadow utility
+@layer utilities {
+    .text-shadow {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+    .hover\:text-shadow-lg:hover {
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+    }
+  } */
