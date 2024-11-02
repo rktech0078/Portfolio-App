@@ -83,7 +83,7 @@ const About = () => {
                                     <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
                                         Abdul Rafay Khan
                                     </h2>
-                                    <p className="leading-relaxed text-base line-clamp-2">
+                                    <p className="leading-relaxed text-base line-clamp-2 hover:line-clamp-6">
                                         Currently pursuing my intermediate degree in engineering at D. J. Sindh Government Science College, and I have completed my matriculation in science at Al Ghazali High School.
                                     </p>
                                     <a className="mt-3 text-yellow-500 inline-flex items-center cursor-pointer hover:text-black hover:font-semibold" href='https://www.linkedin.com/in/abdul-rafay-khan-2780b12b5/' target='_blank'>
@@ -113,7 +113,7 @@ const About = () => {
                                     <h2 className="text-gray-900 text-lg title-font font-medium mb-3">
                                         The Coder
                                     </h2>
-                                    <p className="leading-relaxed text-base line-clamp-2">
+                                    <p className="leading-relaxed text-base line-clamp-2 hover:line-clamp-6">
                                         A pasionate UI/UX Designer <br />
                                         Full Stack Developer <br />
                                         Gen AI Engineer
