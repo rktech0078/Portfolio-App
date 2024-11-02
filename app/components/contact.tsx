@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 const Contact = () => {
@@ -18,7 +19,7 @@ const Contact = () => {
         className="absolute inset-0"
         // frameBorder={0}
         title="map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7241.240267635285!2d67.17188523902315!3d24.842661097842583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33a6e2ccf6fb3%3A0xff7184b0185fb1!2s36-B%20Area%20Sector%2036%20B%20Landhi%20Town%2C%20Karachi%2C%20Karachi%20City%2C%20Sindh%2C%20Pakistan!5e0!3m2!1sen!2s!4v1730046817824!5m2!1sen!2s"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d905.1440609020921!2d67.1742275771322!3d24.844161277889963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33b5244d2a8b9%3A0xaeb3fff1431a2ee2!2sYameen%20Kiryana%20shop!5e0!3m2!1sen!2s!4v1730558653322!5m2!1sen!2s"
         style={{ filter: "contrast(1.2) opacity(0.4)" }}
       />
       <div

@@ -4,6 +4,7 @@ import { FaLaptopCode } from "react-icons/fa6";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 import { FaReact } from "react-icons/fa";
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 
@@ -17,9 +18,9 @@ const About = () => {
             <section className="text-gray-600 body-font -mb-24 -mt-14">
                 <div className="container px-5 py-24 mx-auto" >
 
-                        <h1 className="flex-grow sm:pr-16 text-6xl font-bold title-font text-gray-900 text-center m-10 mb-12">
-                            About Me
-                        </h1>
+                    <h1 className="flex-grow sm:pr-16 text-6xl font-bold title-font text-gray-900 text-center m-10 mb-12">
+                        About Me
+                    </h1>
 
                     <div
                         className="lg:w-2/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto"
@@ -42,12 +43,15 @@ const About = () => {
                         </p>
 
                         <Link href={"/assests/CV/my-cv.pdf"} target='_blank'>
-                        <button className="inline-flex items-center bg-[#ffc107] hover:bg-black border-0 py-1 px-3 focus:outline-none rounded-xl font-bold text-white  md:mt-0 text-lg m-16 mt-20 shadow-xl hover:shadow-2xl transition-shadow duration-500">
-                            View CV
-                            <VscAccount className='w-14 h-6'/> 
-                        </button>
+                            <button className="inline-flex items-center bg-[#ffc107] hover:bg-black border-0 py-1 px-3 focus:outline-none rounded-xl font-bold text-white  md:mt-0 text-lg m-16 mt-20 shadow-xl hover:shadow-2xl transition-shadow duration-500">
+                                <span className='mr-2'>View CV</span>
+                                <Image
+                                src={require("../../public/assests/pictures/bg-remove-CV.gif")}
+                                alt='CV'
+                                className='w-28'/>
+                                {/* <VscAccount className='w-14 h-6' /> */}
+                            </button>
                         </Link>
-
                     </div>
                 </div>
             </section>
@@ -69,7 +73,10 @@ const About = () => {
                                     className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-yellow-100 text-yellow-500 flex-shrink-0 "
 
                                 >
-                                    <FaLaptopCode className='text-4xl'/>
+                                    {/* <FaLaptopCode className='text-4xl'/> */}
+                                    <Image src={require("../../public/assests/pictures/bg-remove-icon.gif")}
+                                        alt="Animation"
+                                        className="w-16" />
 
                                 </div>
                                 <div className="flex-grow" >
@@ -77,12 +84,12 @@ const About = () => {
                                         Abdul Rafay Khan
                                     </h2>
                                     <p className="leading-relaxed text-base line-clamp-2">
-                                    Currently pursuing my intermediate degree in engineering at D. J. Sindh Government Science College, and I have completed my matriculation in science at Al Ghazali High School.
+                                        Currently pursuing my intermediate degree in engineering at D. J. Sindh Government Science College, and I have completed my matriculation in science at Al Ghazali High School.
                                     </p>
                                     <a className="mt-3 text-yellow-500 inline-flex items-center cursor-pointer hover:text-black hover:font-semibold" href='https://www.linkedin.com/in/abdul-rafay-khan-2780b12b5/' target='_blank'>
                                         Learn More
-                                        <FaArrowRightFromBracket className='ml-3'/>
- 
+                                        <FaArrowRightFromBracket className='ml-3' />
+
                                     </a>
                                 </div>
                             </div>
@@ -96,7 +103,10 @@ const About = () => {
                                     className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-yellow-100 text-yellow-500 flex-shrink-0"
 
                                 >
-                                    <FaReact className='text-4xl font-bold'/>
+                                    {/* <FaReact className='text-4xl font-bold' /> */}
+                                    <Image src={require("../../public/assests/pictures/bg-remove-programmer.gif")}
+                                    alt='Programmer'
+                                    className='w-14'/>
 
                                 </div>
                                 <div className="flex-grow">
@@ -110,7 +120,7 @@ const About = () => {
                                     </p>
                                     <a className="mt-3 text-yellow-500 inline-flex items-center cursor-pointer hover:text-black hover:font-semibold" href='https://www.linkedin.com/in/abdul-rafay-khan-2780b12b5/' target='_blank'>
                                         Learn More
-                                        <FaArrowRightFromBracket className='ml-3'/>
+                                        <FaArrowRightFromBracket className='ml-3' />
                                     </a>
                                 </div>
                             </div>

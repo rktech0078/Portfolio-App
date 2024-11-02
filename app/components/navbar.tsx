@@ -25,7 +25,7 @@ const Navbar = () => {
     <div className='bg-white bg-opacity-90 z-50 sticky top-0'>
       <header className="text-gray-600 body-font">
         <div className="container mx-auto flex flex-wrap p-2 justify-between items-center">
-          <Link href={"/"} className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+          <Link href={"#/"} className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
             <Image
               src={require("../../public/assests/pictures/logo.png")}
               alt='Logo'
@@ -36,7 +36,7 @@ const Navbar = () => {
             <span className="ml-3 text-xl hover:text-[#ffc107] font-bold">My Portfolio</span>
           </Link>
           <nav className="md:ml-auto md:mr-auto flex-wrap items-center text-base justify-center space-x-10 hidden sm:block">
-            <Link href={"/"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">Home</Link>
+            <Link href={"#/"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">Home</Link>
             <Link href={"#about"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">About</Link>
             <Link href={"#skills"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">Skills</Link>
             <Link href={"#projects"} className="mr-5 hover:text-[#ffc107] font-bold hover:underline text-shadow hover:text-shadow-lg transition duration-300">Projects</Link>
