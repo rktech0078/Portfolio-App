@@ -1,8 +1,8 @@
 import React from 'react'
-import { VscAccount } from "react-icons/vsc";
-import { FaLaptopCode } from "react-icons/fa6";
+// import { VscAccount } from "react-icons/vsc";
+// import { FaLaptopCode } from "react-icons/fa6";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
-import { FaReact } from "react-icons/fa";
+// import { FaReact } from "react-icons/fa";
 import Link from 'next/link';
 import Image from 'next/image';
 
