@@ -35,7 +35,7 @@ const Footer = () => {
                             <FaFacebook className='w-6 h-6 hover:text-[#1877F2] ' />
                         </Link>
                         <Link href={'https://github.com/rktech0078'} target='_blank' className="ml-3 text-gray-500">
-                            <FaGithub className='w-6 h-6 hover:text-[#a956d0]' />
+                            <FaGithub className='w-6 h-6 hover:text-black' />
                         </Link>
                         <Link href={"https://www.linkedin.com/in/abdul-rafay-khan-2780b12b5/"} target='_target' className="ml-3 text-gray-500">
                             <FaLinkedin className='w-6 h-6 hover:text-[#0A66C2]' />
