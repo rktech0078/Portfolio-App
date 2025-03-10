@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { getProjects } from '@/sanity/lib/client'
 import { urlForImage } from '@/sanity/lib/image'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 type Project = {
   _id: string;
@@ -13,12 +14,7 @@ type Project = {
   subtitle: string;
   description: string;
   projectLink: string;
-  image: {
-    asset: {
-      _ref: string;
-      _type: string;
-    };
-  };
+  image: SanityImageSource;
   tags: string[];
   displayOrder?: number;
 }
@@ -98,23 +94,13 @@ const Project = () => {
                       <div className="h-full border-2 border-gray-200 border-opacity-60 dark:border-gray-700 dark:border-opacity-75 rounded-lg overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-900 dark:bg-gray-800 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
                         <div className="relative h-48 overflow-hidden">
                           {project.image && (
-                            typeof project.image === 'string' ? (
-                              <Image
-                                alt={project.title}
-                                className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-                                src={project.image}
-                                width={500}
-                                height={300}
-                              />
-                            ) : (
-                              <Image
-                                alt={project.title}
-                                className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-                                src={urlForImage(project.image).url()}
-                                width={500}
-                                height={300}
-                              />
-                            )
+                            <Image
+                              alt={project.title}
+                              className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                              src={urlForImage(project.image).url()}
+                              width={500}
+                              height={300}
+                            />
                           )}
                           <div className="absolute top-0 right-0 bg-[#ffc107] text-white px-2 py-1 m-2 rounded-md text-xs font-bold">
                             Project
