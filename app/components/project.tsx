@@ -88,20 +88,16 @@ const Project = () => {
                       transition={{ duration: 0.5, delay: index * 0.1 }}
                       className="lg:w-1/3 sm:w-1/2 p-4"
                     >
-                      <div className="h-full border-2 border-gray-200 border-opacity-60 dark:border-gray-700 dark:border-opacity-75 rounded-lg overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-900 dark:bg-gray-800 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
+                      <div className="h-full border-2 border-gray-200 border-opacity-60 dark:border-gray-700 dark:border-opacity-75 rounded-lg overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-900 dark:bg-gray-800 transition-all duration-300 hover:-translate-y-1">
                         <div className="relative h-48 overflow-hidden">
-                          {project.image && typeof project.image === 'object' && urlForImage(project.image) ? (
+                          {project.image && (
                             <Image
                               alt={project.title}
                               className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-                              src={urlForImage(project.image)?.url() || ''}
+                              src={urlForImage(project.image).toString()}
                               width={500}
                               height={300}
                             />
-                          ) : (
-                            <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                              <span className="text-gray-500 dark:text-gray-400">No Image Available</span>
-                            </div>
                           )}
                           <div className="absolute top-0 right-0 bg-[#ffc107] text-white px-2 py-1 m-2 rounded-md text-xs font-bold">
                             Project
@@ -141,6 +137,39 @@ const Project = () => {
                   ))}
                 </AnimatePresence>
               </div>
+              
+              {projects.length > 3 && (
+                <motion.div 
+                  className="flex justify-center mt-12"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <button
+                    onClick={() => setShowAll(!showAll)}
+                    className="group relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 ease-in-out bg-[#ffc107] rounded-full hover:bg-[#ffcd38] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ffc107]"
+                  >
+                    <span className="relative">
+                      {showAll ? 'View Less' : 'View More'}
+                      <motion.span
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </span>
+                    <motion.svg
+                      className="w-5 h-5 ml-2"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      animate={{ rotate: showAll ? 180 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </motion.svg>
+                  </button>
+                </motion.div>
+              )}
             </>
           )}
         </div>
