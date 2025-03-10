@@ -6,7 +6,7 @@ import { FaArrowUpRightFromSquare } from "react-icons/fa6"
 import Typewriter from 'typewriter-effect'
 import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
-import { Lumiflex   } from "uvcanvas"
+import { Tranquiluxe } from "uvcanvas"
 // Lumiflex , Novatrix, Zenitho, Velustro, Tranquiluxe, Opulento, Xenon
 
 
@@ -17,7 +17,7 @@ const Hero2 = () => {
     <div id='home' className={`relative min-h-screen w-full overflow-hidden ${theme === 'dark' ? 'bg-gray-900' : 'bg-[#f5f5f5]'} -mt-14`}>
       {/* UV Canvas Background */}
       <div className="absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
-        <Lumiflex  />
+        <Tranquiluxe />
       </div>
 
       <section className="relative text-gray-600 dark:text-gray-300 body-font w-full">
