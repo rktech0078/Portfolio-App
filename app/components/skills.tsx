@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { getSkills } from '@/sanity/lib/client'
 import getIconByName from '../utils/iconMapper'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -18,15 +18,15 @@ const Skills = () => {
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
 
-  // Fallback skills with display order
-  const fallbackSkills = [
+  // Memoize fallback skills to prevent re-renders
+  const fallbackSkills = useMemo(() => [
     { _id: 'html', title: 'HTML', proficiency: 100, icon: 'FaHtml5', displayOrder: 1 },
     { _id: 'css', title: 'CSS', proficiency: 90, icon: 'FaCss3Alt', displayOrder: 2 },
     { _id: 'js', title: 'Javascript', proficiency: 70, icon: 'IoLogoJavascript', displayOrder: 3 },
     { _id: 'ts', title: 'Typescript', proficiency: 80, icon: 'SiTypescript', displayOrder: 4 },
     { _id: 'nextjs', title: 'Next JS', proficiency: 80, icon: 'SiNextdotjs', displayOrder: 5 },
     { _id: 'vercel', title: 'Vercel Deployment', proficiency: 70, icon: 'SiVercel', displayOrder: 6 },
-  ];
+  ], []); // Empty dependency array since these values never change
 
   useEffect(() => {
     async function fetchSkills() {
