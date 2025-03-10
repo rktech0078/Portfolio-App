@@ -6,7 +6,6 @@ import React, { useEffect, useState } from 'react'
 import { getProjects } from '@/sanity/lib/client'
 import { urlForImage } from '@/sanity/lib/image'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from 'next-themes'
 
 type Project = {
   _id: string;
@@ -14,7 +13,12 @@ type Project = {
   subtitle: string;
   description: string;
   projectLink: string;
-  image: any;
+  image: {
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+  };
   tags: string[];
   displayOrder?: number;
 }
@@ -23,45 +27,6 @@ const Project = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
-  const { theme } = useTheme();
-
-  // Empty fallback projects array - all projects will come from Sanity
-  const fallbackProjects: Project[] = [];
-  
-  /* Commented out hardcoded projects
-  const fallbackProjects = [
-    {
-      _id: 'moonwalk',
-      title: 'Moon Walk',
-      subtitle: 'The Animated Web-App',
-      description: 'Moon walk is animated web app that show the creativity of the author.',
-      projectLink: 'https://giaic-assignment-3-moonwalk.vercel.app/',
-      image: '/assests/projects/project-2.jpg',
-      tags: ['Next.js', 'Animation', 'Web Design'],
-      displayOrder: 1
-    },
-    {
-      _id: 'resume',
-      title: 'Resume App',
-      subtitle: 'The Static Resume Web-App',
-      description: 'Resume App is the Static and Customized Resume generator web app that show the creativity of the author.',
-      projectLink: 'https://hackathon-01-ten.vercel.app/index.html',
-      image: '/assests/projects/resume.jpg',
-      tags: ['HTML', 'CSS', 'JavaScript'],
-      displayOrder: 2
-    },
-    {
-      _id: 'simple',
-      title: 'Simple Web App',
-      subtitle: 'The Simple Multi-Page Website',
-      description: 'The project involved developing a multi-page website and deploying it on Vercel. It was an amazing learning experience that helped me enhance my web development skills, especially in modern frameworks like Next.js.',
-      projectLink: 'https://assignments-8qlq.vercel.app/',
-      image: '/assests/projects/project-4.jpg',
-      tags: ['Next.js', 'React', 'Tailwind'],
-      displayOrder: 3
-    }
-  ];
-  */
 
   useEffect(() => {
     async function fetchProjects() {

@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import { getSkills } from '@/sanity/lib/client'
 import getIconByName from '../utils/iconMapper'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useTheme } from 'next-themes'
 
 type Skill = {
   _id: string;
@@ -18,7 +17,6 @@ const Skills = () => {
   const [skills, setSkills] = useState<Skill[]>([]);
   const [loading, setLoading] = useState(true);
   const [showAll, setShowAll] = useState(false);
-  const { theme } = useTheme();
 
   // Fallback skills with display order
   const fallbackSkills = [
@@ -73,7 +71,7 @@ const Skills = () => {
     }
 
     fetchSkills();
-  }, []);
+  }, [fallbackSkills]);
 
   const displayedSkills = showAll ? skills : skills.slice(0, 6);
 

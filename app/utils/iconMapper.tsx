@@ -55,7 +55,18 @@ const iconMap: { [key: string]: React.ReactElement } = {
 };
 
 const getIconByName = (name: string) => {
-  return iconMap[name] || <FaHtml5 className='text-2xl hover:text-[#000000]' />;
+  if (!name) {
+    console.warn('No icon name provided');
+    return <FaDatabase className='text-2xl hover:text-[#000000]' />;
+  }
+  
+  const icon = iconMap[name];
+  if (!icon) {
+    console.warn(`Icon "${name}" not found in iconMap`);
+    return <FaDatabase className='text-2xl hover:text-[#000000]' />;
+  }
+  
+  return icon;
 };
 
 export default getIconByName; 

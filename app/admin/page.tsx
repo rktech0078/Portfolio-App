@@ -22,7 +22,7 @@ export default function AdminGuide() {
             </Link>
           </p>
           <p>
-            The first time you visit, you'll need to log in with the Sanity account credentials you used during setup.
+            The first time you visit, you&apos;ll need to log in with the Sanity account credentials you used during setup.
           </p>
         </div>
       </div>
@@ -34,17 +34,17 @@ export default function AdminGuide() {
         </p>
         <ol className="list-decimal pl-5 mb-6 space-y-2">
           <li>Go to the Sanity Studio at <code>/studio</code></li>
-          <li>Click on "Skills" in the sidebar</li>
-          <li>Click the "Create new" button</li>
+          <li>Click on &quot;Skills&quot; in the sidebar</li>
+          <li>Click the &quot;Create new&quot; button</li>
           <li>Fill in the following fields:
             <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li><strong>Skill Title:</strong> Name of the skill (e.g., "React", "Node.js")</li>
+              <li><strong>Skill Title:</strong> Name of the skill (e.g., &quot;React&quot;, &quot;Node.js&quot;)</li>
               <li><strong>Proficiency:</strong> Your skill level as a percentage (0-100)</li>
-              <li><strong>Icon Name:</strong> The name of the React icon (e.g., "FaReact", "FaNodeJs")</li>
+              <li><strong>Icon Name:</strong> The name of the React icon (e.g., &quot;FaReact&quot;, &quot;FaNodeJs&quot;)</li>
               <li><strong>Display Order:</strong> The order in which this skill should appear (lower numbers first)</li>
             </ul>
           </li>
-          <li>Click "Publish" to save your changes</li>
+          <li>Click &quot;Publish&quot; to save your changes</li>
         </ol>
         <p className="text-sm bg-yellow-50 p-3 rounded border border-yellow-200">
           <strong>Note:</strong> For the Icon Name, you can use any icon name from the react-icons library. Common prefixes are:
@@ -59,8 +59,8 @@ export default function AdminGuide() {
         </p>
         <ol className="list-decimal pl-5 mb-6 space-y-2">
           <li>Go to the Sanity Studio at <code>/studio</code></li>
-          <li>Click on "Projects" in the sidebar</li>
-          <li>Click the "Create new" button</li>
+          <li>Click on &quot;Projects&quot; in the sidebar</li>
+          <li>Click the &quot;Create new&quot; button</li>
           <li>Fill in the following fields:
             <ul className="list-disc pl-5 mt-2 space-y-1">
               <li><strong>Project Title:</strong> Main title of your project</li>
@@ -72,7 +72,7 @@ export default function AdminGuide() {
               <li><strong>Display Order:</strong> The order in which this project should appear (lower numbers first)</li>
             </ul>
           </li>
-          <li>Click "Publish" to save your changes</li>
+          <li>Click &quot;Publish&quot; to save your changes</li>
         </ol>
       </div>
       

@@ -4,7 +4,8 @@ import React from 'react'
 import { useTheme } from 'next-themes'
 
 const Contact = () => {
-  const { theme } = useTheme()
+  // Remove unused theme variable
+  // const { theme } = useTheme()
   
   return (
     <div id='contact'>

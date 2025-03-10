@@ -9,7 +9,8 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 
 const About = () => {
-    const { theme } = useTheme();
+    // Remove unused theme variable
+    // const { theme } = useTheme();
     
     return (
         <div id='about'>

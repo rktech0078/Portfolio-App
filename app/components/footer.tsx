@@ -10,7 +10,8 @@ import { TbBrandFiverr } from "react-icons/tb";
 import { useTheme } from 'next-themes';
 
 const Footer = () => {
-    const { theme } = useTheme();
+    // Remove unused theme variable
+    // const { theme } = useTheme();
     
     return (
         <div className='bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800'>
