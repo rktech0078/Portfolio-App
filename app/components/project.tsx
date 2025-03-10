@@ -31,14 +31,11 @@ const Project = () => {
         
         // Sort projects by display order
         const sortedProjects = sanityProjects.sort((a: Project, b: Project) => {
-          // If both have display order, compare them
           if (a.displayOrder && b.displayOrder) {
             return a.displayOrder - b.displayOrder;
           }
-          // If only one has display order, prioritize it
           if (a.displayOrder) return -1;
           if (b.displayOrder) return 1;
-          // If neither has display order, maintain their relative position
           return 0;
         });
 
@@ -93,14 +90,18 @@ const Project = () => {
                     >
                       <div className="h-full border-2 border-gray-200 border-opacity-60 dark:border-gray-700 dark:border-opacity-75 rounded-lg overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-900 dark:bg-gray-800 dark:border-gray-700 transition-all duration-300 hover:-translate-y-1">
                         <div className="relative h-48 overflow-hidden">
-                          {project.image && (
+                          {project.image && typeof project.image === 'object' && urlForImage(project.image) ? (
                             <Image
                               alt={project.title}
                               className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
-                              src={urlForImage(project.image).url()}
+                              src={urlForImage(project.image)?.url() || ''}
                               width={500}
                               height={300}
                             />
+                          ) : (
+                            <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                              <span className="text-gray-500 dark:text-gray-400">No Image Available</span>
+                            </div>
                           )}
                           <div className="absolute top-0 right-0 bg-[#ffc107] text-white px-2 py-1 m-2 rounded-md text-xs font-bold">
                             Project
@@ -116,20 +117,15 @@ const Project = () => {
                           <p className="leading-relaxed mb-3 text-gray-700 dark:text-gray-300 line-clamp-3">
                             {project.description}
                           </p>
-                          
                           {project.tags && project.tags.length > 0 && (
                             <div className="flex flex-wrap gap-2 mt-3 mb-3">
                               {project.tags.map((tag, index) => (
-                                <span 
-                                  key={index} 
-                                  className="text-xs inline-block py-1 px-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300"
-                                >
+                                <span key={index} className="text-xs inline-block py-1 px-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
                                   #{tag}
                                 </span>
                               ))}
                             </div>
                           )}
-                          
                           <div className="flex items-center flex-wrap mt-auto pt-3 border-t border-gray-200 dark:border-gray-700">
                             <Link href={project.projectLink} target='_blank' className="text-[#ffc107] inline-flex items-center md:mb-2 lg:mb-0 group">
                               View Project
@@ -145,39 +141,6 @@ const Project = () => {
                   ))}
                 </AnimatePresence>
               </div>
-
-              {projects.length > 3 && (
-                <motion.div 
-                  className="flex justify-center mt-12"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <button
-                    onClick={() => setShowAll(!showAll)}
-                    className="group relative inline-flex items-center justify-center px-8 py-3 font-bold text-white transition-all duration-300 ease-in-out bg-[#ffc107] rounded-full hover:bg-[#ffcd38] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ffc107]"
-                  >
-                    <span className="relative">
-                      {showAll ? 'View Less' : 'View All'}
-                      <motion.span
-                        className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform origin-left"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    </span>
-                    <motion.svg
-                      className="w-5 h-5 ml-2"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      animate={{ rotate: showAll ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </motion.svg>
-                  </button>
-                </motion.div>
-              )}
             </>
           )}
         </div>
