@@ -6,7 +6,7 @@ import { FaArrowRightFromBracket } from "react-icons/fa6";
 // import { FaReact } from "react-icons/fa";
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTheme } from 'next-themes';
+// import { useTheme } from 'next-themes';
 
 const About = () => {
     // Remove unused theme variable

@@ -86,7 +86,7 @@ export default function AdminGuide() {
             <strong>Changes not showing up?</strong> It may take a few moments for changes to propagate. Try refreshing your portfolio page.
           </li>
           <li>
-            <strong>Icon not working?</strong> Make sure you're using the exact icon name from the react-icons library.
+            <strong>Icon not working?</strong> Make sure you&apos;re using the exact icon name from the react-icons library.
             You can refer to <a href="https://react-icons.github.io/react-icons/" target="_blank" rel="noopener noreferrer" className="text-[#ffc107] hover:underline">react-icons.github.io</a> for the complete list.
           </li>
         </ul>

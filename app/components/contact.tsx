@@ -1,7 +1,7 @@
 'use client'
 // import Image from 'next/image'
 import React from 'react'
-import { useTheme } from 'next-themes'
+// import { useTheme } from 'next-themes'
 
 const Contact = () => {
   // Remove unused theme variable

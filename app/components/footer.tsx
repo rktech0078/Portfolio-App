@@ -7,7 +7,7 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { TbBrandFiverr } from "react-icons/tb";
-import { useTheme } from 'next-themes';
+// import { useTheme } from 'next-themes';
 
 const Footer = () => {
     // Remove unused theme variable
