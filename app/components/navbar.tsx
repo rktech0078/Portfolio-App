@@ -74,7 +74,7 @@ const Navbar = () => {
     { href: "/#skills", label: "Skills" },
     { href: "/#projects", label: "Projects" },
     { href: "/#contact", label: "Contact" },
-    { href: "/studio", label: "Studio", target: "_blank"},
+    { href: "/reviews", label: "Review", target: "_blank"},
     { href: "/admin", label: "Admin", isHighlighted: true },
   ];
 

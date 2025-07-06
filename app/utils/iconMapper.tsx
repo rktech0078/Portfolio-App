@@ -9,8 +9,10 @@ import {
   FaAws,
   FaBootstrap,
   FaDocker,
-  FaPython
+  FaPython,
+  FaMagento 
 } from "react-icons/fa";
+
 import { 
   SiTypescript, 
   SiNextdotjs, 
@@ -21,11 +23,19 @@ import {
   SiTailwindcss,
   SiFirebase,
   SiSupabase,
+  SiWeb3Dotjs,
   SiPrisma,
-  SiRedux
+  SiRedux,
+  SiDaisyui,
+  SiOpenai,
+  SiStreamlit  
 } from "react-icons/si";
+
+import { TbBrandFramerMotion } from "react-icons/tb";
 import { IoLogoJavascript } from "react-icons/io5";
 import { TbBrandThreejs } from "react-icons/tb";
+import { GiDaisy } from "react-icons/gi";
+
 
 // Map icon names to their components
 const iconMap: { [key: string]: React.ReactElement } = {
@@ -51,7 +61,14 @@ const iconMap: { [key: string]: React.ReactElement } = {
   SiSupabase: <SiSupabase className='text-2xl hover:text-[#000000]' />,
   SiPrisma: <SiPrisma className='text-2xl hover:text-[#000000]' />,
   SiRedux: <SiRedux className='text-2xl hover:text-[#000000]' />,
-  TbBrandThreejs: <TbBrandThreejs className='text-2xl hover:text-[#000000]' />
+  TbBrandThreejs: <TbBrandThreejs className='text-2xl hover:text-[#000000]' />,
+  SiWeb3Dotjs : <SiWeb3Dotjs className='text-2xl hover:text-[#000000]' />,
+  SiDaisyui : <SiDaisyui className='text-2xl hover:text-[#000000]' />,
+  SiOpenai : <SiOpenai className='text-2xl hover:text-[#000000]' />,
+  SiStreamlit : <SiStreamlit className='text-2xl hover:text-[#000000]' />,
+  GiDaisy  : <GiDaisy  className='text-2xl hover:text-[#000000]' />,
+  FaMagento: <FaMagento className='text-2xl hover:text-[#000000]' />,
+  TbBrandFramerMotion : <TbBrandFramerMotion  className='text-2xl hover:text-[#000000]' />,
 };
 
 const getIconByName = (name: string) => {
