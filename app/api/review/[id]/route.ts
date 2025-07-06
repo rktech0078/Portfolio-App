@@ -14,9 +14,7 @@ export async function PATCH(request: NextRequest, context: { params: { id: strin
   }
 }
 
-export async function DELETE(_request: NextRequest, context: { params: { id: string } }) {
-  const { params } = context;
-
+export async function DELETE(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
     await client.delete(params.id);
     return NextResponse.json({ success: true });
