@@ -24,14 +24,10 @@ export async function PATCH(
  * object and then get `params` from it inside the function.
  */
 export async function DELETE(
-  request: NextRequest, // The request object is the first argument.
-  context: { params: { id: string } } // The context object is the second.
+  request: NextRequest,
+  { params }: { params: { id: string } }
 ) {
-  // Destructure params from the context object.
-  const { params } = context;
-
   try {
-    // Use the id from params to delete the document.
     await client.delete(params.id);
     return NextResponse.json({ success: true });
   } catch (error) {
