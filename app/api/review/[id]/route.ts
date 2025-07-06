@@ -1,24 +1,22 @@
-// /app/api/review/[id]/route.ts
-import { client } from "@/sanity/lib/sanity";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function PATCH(request: NextRequest, context: { params: { id: string } }) {
-  const { params } = context;
-  const data = await request.json();
-
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
-    await client.patch(params.id).set(data).commit();
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json({ success: false, error });
-  }
-}
+    const { id } = params; // Now you can access the 'id'
 
-export async function DELETE(_request: NextRequest, { params }: { params: { id: string } }) {
-  try {
-    await client.delete(params.id);
-    return NextResponse.json({ success: true });
+    // Your logic to delete the review with the given id goes here
+    console.log(`Attempting to delete review with ID: ${id}`);
+
+    // Example: Replace with your actual database logic
+    // const deletedReview = await db.review.delete({ where: { id } });
+
+    return NextResponse.json({ message: `Review ${id} deleted successfully.` }, { status: 200 });
+
   } catch (error) {
-    return NextResponse.json({ success: false, error });
+    console.error("Error deleting review:", error);
+    return NextResponse.json({ message: "An error occurred while deleting the review." }, { status: 500 });
   }
 }
