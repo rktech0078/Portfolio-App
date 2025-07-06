@@ -6,19 +6,18 @@ import { FaArrowUpRightFromSquare } from "react-icons/fa6"
 import Typewriter from 'typewriter-effect'
 import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
-import { Tranquiluxe } from "uvcanvas"
-// Lumiflex , Novatrix, Zenitho, Velustro, Tranquiluxe, Opulento, Xenon
-
 
 const Hero2 = () => {
   const { theme } = useTheme()
 
   return (
-    <div id='home' className={`relative min-h-screen w-full overflow-hidden ${theme === 'dark' ? 'bg-gray-900' : 'bg-[#f5f5f5]'} -mt-14`}>
-      {/* UV Canvas Background */}
-      <div className="absolute inset-0 w-full h-full" style={{ zIndex: 0 }}>
-        <Tranquiluxe />
-      </div>
+    <div
+      id='home'
+      className={`relative min-h-screen w-full overflow-hidden ${
+        theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'
+      } -mt-14`}
+    >
+      {/* Removed UV Canvas Background */}
 
       <section className="relative text-gray-600 dark:text-gray-300 body-font w-full">
         <div className="container mx-auto flex px-4 py-24 md:flex-row flex-col items-center max-w-6xl">
@@ -44,8 +43,12 @@ const Hero2 = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:flex-grow md:w-[50%] lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center relative z-10"
           >
-            <h1 className={`title-font sm:text-5xl text-5xl mb-4 font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-              Hey there, I am 
+            <h1
+              className={`title-font sm:text-5xl text-5xl mb-4 font-bold ${
+                theme === 'dark' ? 'text-white' : 'text-gray-900'
+              }`}
+            >
+              Hey there, I am
               <br className="lg:inline-block" />
               <Typewriter
                 options={{
@@ -70,14 +73,18 @@ const Hero2 = () => {
             </p>
 
             <div className="flex justify-center">
-              <Link href={"https://www.linkedin.com/in/abdul-rafay-khan-2780b12b5/"} target='_' className='font-bold'>
+              <Link
+                href="https://www.linkedin.com/in/abdul-rafay-khan-2780b12b5/"
+                target="_blank"
+                className="font-bold"
+              >
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="inline-flex text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-purple-500 hover:to-pink-500 border-0 py-2 px-6 focus:outline-none rounded-xl text-lg shadow-md hover:shadow-xl transition-all duration-300"
                 >
                   Hire Me
-                  <FaArrowUpRightFromSquare className='m-1 text-[17px] ml-3'/>
+                  <FaArrowUpRightFromSquare className="m-1 text-[17px] ml-3" />
                 </motion.button>
               </Link>
             </div>
