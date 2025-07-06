@@ -12,7 +12,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   }
 }
 
-export async function DELETE(_: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_: unknown, { params }: { params: { id: string } }) {
   try {
     await client.delete(params.id);
     return NextResponse.json({ success: true });
