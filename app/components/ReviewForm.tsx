@@ -1,40 +1,56 @@
 'use client';
 import { useState } from 'react';
 
-export default function ReviewForm({ onReviewAdded }: { onReviewAdded: (review: any) => void }) {
-  const [form, setForm] = useState({ name: '', message: '' });
+type Review = {
+  name: string;
+  message: string;
+};
+
+export default function ReviewForm({
+  onReviewAdded,
+}: {
+  onReviewAdded: (review: Review) => void;
+}) {
+  const [form, setForm] = useState<Review>({ name: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus('loading');
 
-    const res = await fetch('/api/submitReview', {
-      method: 'POST',
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch('/api/submitReview', {
+        method: 'POST',
+        body: JSON.stringify(form),
+      });
 
-    const result = await res.json();
+      const result = await res.json();
 
-    if (result.success) {
-      setStatus('success');
-      setForm({ name: '', message: '' });
-      onReviewAdded(result.data); // update parent reviews
-    } else {
+      if (result.success) {
+        setStatus('success');
+        setForm({ name: '', message: '' });
+        onReviewAdded(result.data as Review);
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      console.error(err);
       setStatus('error');
     }
 
-    // Thodi dair baad status idle kardo
     setTimeout(() => setStatus('idle'), 2000);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-4 bg-white/30 backdrop-blur rounded-xl shadow-md">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 p-4 bg-white/30 backdrop-blur rounded-xl shadow-md"
+    >
       <input
         type="text"
         placeholder="Your Name"
         value={form.name}
-        onChange={e => setForm({ ...form, name: e.target.value })}
+        onChange={(e) => setForm({ ...form, name: e.target.value })}
         className="w-full px-4 py-2 border rounded"
         required
         disabled={status === 'loading'}
@@ -42,7 +58,7 @@ export default function ReviewForm({ onReviewAdded }: { onReviewAdded: (review: 
       <textarea
         placeholder="Your Review"
         value={form.message}
-        onChange={e => setForm({ ...form, message: e.target.value })}
+        onChange={(e) => setForm({ ...form, message: e.target.value })}
         className="w-full px-4 py-2 border rounded"
         required
         disabled={status === 'loading'}

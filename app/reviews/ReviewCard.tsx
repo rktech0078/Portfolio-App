@@ -3,7 +3,14 @@
 import { useState } from "react";
 import { client } from "../../sanity/lib/sanity";
 
-export const ReviewCard = ({ review }: { review: any }) => {
+type Review = {
+  _id: string;
+  name: string;
+  message: string;
+  rating: number;
+};
+
+export const ReviewCard = ({ review }: { review: Review }) => {
   const [edit, setEdit] = useState(false);
   const [form, setForm] = useState({ ...review });
 

@@ -106,15 +106,6 @@ export default function ReviewsPage(): JSX.Element {
     return (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1);
   };
 
-  const getRatingDistribution = (): Record<number, number> => {
-    const distribution: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    reviews.forEach(r => {
-      if (r.rating >= 1 && r.rating <= 5) {
-        distribution[r.rating]++;
-      }
-    });
-    return distribution;
-  };
 
   const formatDate = (dateString: string): string => {
     return new Date(dateString).toLocaleDateString('en-US', {
