@@ -23,13 +23,17 @@ export async function PATCH(
 }
 
 // DELETE - Delete Review
-export async function DELETE(
-  request: NextRequest,
-  context: { params: { id: string } }
-) {
-  const { params } = context;
+export async function DELETE(request: NextRequest) {
+  // Get the id from the URL
+  const url = new URL(request.url);
+  const id = url.pathname.split("/").pop();
+
+  if (!id) {
+    return NextResponse.json({ success: false, error: "No ID provided" }, { status: 400 });
+  }
+
   try {
-    await client.delete(params.id);
+    await client.delete(id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error in DELETE request:", error);
