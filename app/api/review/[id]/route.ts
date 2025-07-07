@@ -24,7 +24,7 @@ export async function PATCH(
 
 // DELETE - Delete Review
 export async function DELETE(
-  request: Request,
+  request: NextRequest,
   context: { params: { id: string } }
 ) {
   const { params } = context;
