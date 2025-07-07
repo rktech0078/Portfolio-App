@@ -24,11 +24,9 @@ export async function PATCH(
 
 // DELETE - Delete Review
 export async function DELETE(
-  request: NextRequest,
-  context: { params: { id: string } }
+  request: Request,
+  { params }: { params: { id: string } }
 ) {
-  const { params } = context;
-
   try {
     await client.delete(params.id);
     return NextResponse.json({ success: true });
