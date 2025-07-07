@@ -25,10 +25,11 @@ export async function PATCH(
 // DELETE - Delete Review
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   try {
-    await client.delete(params.id);
+    await client.delete(id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error in DELETE request:", error);
