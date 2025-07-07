@@ -2,6 +2,7 @@
 import { client } from "@/sanity/lib/sanity";
 import { NextRequest, NextResponse } from "next/server";
 
+// PATCH - Update Review
 export async function PATCH(
   request: NextRequest,
   context: { params: { id: string } }
@@ -14,24 +15,28 @@ export async function PATCH(
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error in PATCH request:", error);
-    return NextResponse.json({ success: false, error: "Failed to update review" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Failed to update review" },
+      { status: 500 }
+    );
   }
 }
 
-/**
- * The DELETE function signature has been updated to match the style of PATCH.
- * Instead of destructuring in the signature itself, we take the whole `context`
- * object and then get `params` from it inside the function.
- */
+// DELETE - Delete Review
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
+  const { params } = context;
+
   try {
     await client.delete(params.id);
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Error in DELETE request:", error);
-    return NextResponse.json({ success: false, error: "Failed to delete review" }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: "Failed to delete review" },
+      { status: 500 }
+    );
   }
 }
