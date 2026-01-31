@@ -1,40 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { client } from '@/sanity/lib/client';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest) {
     try {
         const secret = process.env.GITHUB_WEBHOOK_SECRET;
+        const eventType = req.headers.get('x-github-event');
+
+        console.log(`Received Webhook Event: ${eventType}`);
+
         if (!secret) {
+            console.error('Missing GITHUB_WEBHOOK_SECRET');
             return NextResponse.json({ error: 'Webhook secret not configured' }, { status: 500 });
         }
 
-        // Verify the request came from GitHub
-        // Note: In a real scenario, you must clone the request to read body twice or read text first
-        // For simplicity here we assume raw body usage if needed, but Next.js requires .json() or .text()
-        // To verify signature properly with Next.js App Router, we need the raw body.
-        // Let's rely on a simpler secret check or trust for now if verif is complex, 
-        // BUT for security, let's try a basic token check if signature fails or is hard to implement without raw body middleware.
-        // Actually, let's just parse the body first.
-        const body = await req.json();
-
-        // You can also add a simple query param ?token=... for easier setup if signature is too complex for now
-        // But let's try to handle the event.
-
-        // We strictly listen for 'push' events
-        const eventType = req.headers.get('x-github-event');
-        if (eventType !== 'push') {
-            return NextResponse.json({ message: 'Ignored event' }, { status: 200 });
+        // Handle Ping (Setup Test)
+        if (eventType === 'ping') {
+            return NextResponse.json({ message: 'Pong! Webhook connected successfully.' }, { status: 200 });
         }
 
+        if (eventType !== 'push') {
+            return NextResponse.json({ message: `Ignored event: ${eventType}` }, { status: 200 });
+        }
+
+        const body = await req.json();
         const repo = body.repository;
 
-        // Basic filtering: Only sync if it has specific topics or is the portfolio itself? 
-        // Or sync ALL? Let's sync ALL that have "portfolio" topic to avoid junk?
-        // User asked for "mere sare github projects". Let's sync ALL public ones.
-
         if (!repo) {
-            return NextResponse.json({ error: 'No repository data' }, { status: 400 });
+            return NextResponse.json({ error: 'No repository data found' }, { status: 400 });
         }
+
+        console.log(`Syncing Repo: ${repo.name}`);
 
         // Prepare Sanity Data
         const projectData = {
