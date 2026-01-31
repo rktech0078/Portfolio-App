@@ -1,113 +1,94 @@
 'use client'
-// import Image from 'next/image'
 import React from 'react'
-// import { useTheme } from 'next-themes'
 
 const Contact = () => {
-  // Remove unused theme variable
-  // const { theme } = useTheme()
-  
   return (
-    <div id='contact'>
-        <section className="text-gray-600 dark:text-gray-300 body-font relative">
-  <div
-    className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap"
-    
-  >
-    <div
-      className="lg:w-2/3 md:w-1/2 bg-gray-300 dark:bg-gray-700 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative"
-      
-    >
-      <iframe
-        width="100%"
-        height="100%"
-        className="absolute inset-0"
-        // frameBorder={0}
-        title="map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d905.1440609020921!2d67.1742275771322!3d24.844161277889963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33b5244d2a8b9%3A0xaeb3fff1431a2ee2!2sYameen%20Kiryana%20shop!5e0!3m2!1sen!2s!4v1730558653322!5m2!1sen!2s"
-        style={{ filter: "contrast(1.2) opacity(0.4)" }}
-      />
-      <div
-        className="bg-white dark:bg-gray-800 relative flex flex-wrap py-6 rounded shadow-md"
-        
-      >
-        <div className="lg:w-1/2 px-6" >
-          <h2 className="title-font font-semibold text-gray-900 dark:text-white tracking-widest text-xs">
-            ADDRESS
+    <section id='contact' className="py-24 bg-secondary/20 relative">
+      <div className="container px-4 mx-auto max-w-7xl">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
+            Get in <span className="text-yellow-500">Touch</span>
           </h2>
-          <p className="mt-1 dark:text-gray-300">
-            Street 35, House 39, Landhi 36-B, Karachi, Sindh, Pakistan
+          <p className="text-muted-foreground max-w-xl mx-auto text-lg">
+            Have a project in mind or just want to say hi? I'd love to hear from you.
           </p>
         </div>
-        <div className="lg:w-1/2 px-6 mt-4 lg:mt-0" >
-          <h2 className="title-font font-semibold text-gray-900 dark:text-white tracking-widest text-xs">
-            EMAIL
-          </h2>
-          <a className="text-[#ffc107] leading-relaxed">rk8466995@gmail.com</a>
-          <h2 className="title-font font-semibold text-gray-900 dark:text-white tracking-widest text-xs mt-4">
-            PHONE
-          </h2>
-          <p className="leading-relaxed dark:text-gray-300">0313-2317606</p>
+
+        <div className="flex flex-col lg:flex-row gap-8 bg-card border border-border rounded-3xl overflow-hidden shadow-2xl">
+          {/* Map Section */}
+          <div className="lg:w-2/3 h-[400px] lg:h-auto relative bg-secondary">
+            <iframe
+              width="100%"
+              height="100%"
+              className="absolute inset-0 grayscale contrast-[1.1] opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+              frameBorder={0}
+              title="map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d905.1440609020921!2d67.1742275771322!3d24.844161277889963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33b5244d2a8b9%3A0xaeb3fff1431a2ee2!2sYameen%20Kiryana%20shop!5e0!3m2!1sen!2s!4v1730558653322!5m2!1sen!2s"
+            />
+            <div className="absolute bottom-6 left-6 bg-background/90 backdrop-blur-md p-6 rounded-2xl shadow-lg max-w-xs border border-border">
+              <h3 className="font-bold text-foreground mb-2">My Studio</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Street 35, House 39, Landhi 36-B, Karachi, Sindh, Pakistan
+              </p>
+              <p className="text-sm font-medium">
+                <span className="text-yellow-500 block mb-1">rk8466995@gmail.com</span>
+                <span className="text-foreground">0313-2317606</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Form Section */}
+          <div className="lg:w-1/3 p-8 lg:p-12 bg-background flex flex-col justify-center">
+            <h3 className="text-2xl font-bold mb-2">Send a Message</h3>
+            <p className="text-muted-foreground mb-8 text-sm">
+              I usually respond within 24 hours.
+            </p>
+
+            <form action="https://formspree.io/f/mpwpzwjl" method="POST" className="space-y-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium mb-2 text-muted-foreground">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="w-full bg-secondary/50 border border-transparent focus:border-yellow-500 focus:bg-background rounded-xl px-4 py-3 outline-none transition-all duration-300"
+                  placeholder="John Doe"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-2 text-muted-foreground">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="w-full bg-secondary/50 border border-transparent focus:border-yellow-500 focus:bg-background rounded-xl px-4 py-3 outline-none transition-all duration-300"
+                  placeholder="john@example.com"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2 text-muted-foreground">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  className="w-full bg-secondary/50 border border-transparent focus:border-yellow-500 focus:bg-background rounded-xl px-4 py-3 outline-none resize-none transition-all duration-300"
+                  placeholder="Tell me about your project..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full bg-foreground text-background font-bold py-4 rounded-xl hover:opacity-90 transition-opacity shadow-lg"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    <div
-      className="lg:w-1/3 md:w-1/2 bg-white dark:bg-gray-800 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0 p-8 rounded-lg"
-      
-    >
-      <h2 className="title-font sm:text-5xl text-5xl mb-4 font-bold text-gray-900 dark:text-white">
-        Contact
-      </h2>
-      <p className="leading-relaxed mb-5 text-gray-600 dark:text-gray-300">
-        Feel Free to Contact Us:
-      </p>
-      <form
-        action="https://formspree.io/f/mpwpzwjl"
-        method="POST"
-      >
-        <div className="relative mb-4" >
-          <label className="leading-7 text-sm text-gray-600 dark:text-gray-300">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            className="w-full bg-white dark:bg-gray-700 dark:text-white rounded border border-gray-300 dark:border-gray-600 focus:border-[#ffc107] focus:ring-2 focus:ring-[#ffc107] text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-          />
-        </div>
-        <div className="relative mb-4" >
-          <label htmlFor="email" className="leading-7 text-sm text-gray-600 dark:text-gray-300">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="w-full bg-white dark:bg-gray-700 dark:text-white rounded border border-gray-300 dark:border-gray-600 focus:border-[#ffc107] focus:ring-2 focus:ring-[#ffc107] text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-          />
-        </div>
-        <div className="relative mb-4" >
-          <label htmlFor="message" className="leading-7 text-sm text-gray-600 dark:text-gray-300">
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            className="w-full bg-white dark:bg-gray-700 dark:text-white rounded border border-gray-300 dark:border-gray-600 focus:border-[#ffc107] focus:ring-2 focus:ring-[#ffc107] h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-            defaultValue={""}
-          />
-        </div>
-        <button type="submit" className="text-white font-bold bg-[#ffc107] border-0 py-2 px-6 focus:outline-none hover:bg-black dark:hover:bg-gray-600 rounded text-lg">
-          Send Message
-        </button>
-      </form>
-      
-    </div>
-  </div>
-</section>
-
-    </div>
+    </section>
   )
 }
 

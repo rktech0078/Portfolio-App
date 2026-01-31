@@ -2,7 +2,8 @@
 import { useEffect, useState } from 'react';
 import { client } from '../../sanity/lib/sanity';
 import axios from 'axios';
-import { Loader2, Star, Edit3, Trash2, MessageCircle, User, Calendar, TrendingUp } from 'lucide-react';
+import { Loader2, Star, Edit3, Trash2, MessageCircle, User, Calendar, TrendingUp, Sparkles, Quote, Plus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Review {
   _id: string;
@@ -32,12 +33,12 @@ export default function ReviewsPage(): JSX.Element {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [deleteLoadingId, setDeleteLoadingId] = useState<string | null>(null);
-  const [showForm, setShowForm] = useState<boolean>(false);
+  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [currentUserName, setCurrentUserName] = useState<string>('');
 
   const fetchReviews = async (): Promise<void> => {
     try {
-      const data: Review[] = await client.fetch(`*[_type == "review"] | order(_createdAt desc)`);
+      const data: Review[] = await client.fetch(`* [_type == "review"] | order(_createdAt desc)`);
       setReviews(data);
     } catch (err) {
       console.error('Error fetching reviews:', err);
@@ -46,11 +47,8 @@ export default function ReviewsPage(): JSX.Element {
 
   useEffect(() => {
     fetchReviews();
-    // Get current user name from localStorage or session
     const savedUserName = localStorage.getItem('currentUserName');
-    if (savedUserName) {
-      setCurrentUserName(savedUserName);
-    }
+    if (savedUserName) setCurrentUserName(savedUserName);
   }, []);
 
   const handleSubmit = async (): Promise<void> => {
@@ -59,17 +57,16 @@ export default function ReviewsPage(): JSX.Element {
 
     try {
       if (editingId) {
-        await axios.patch(`/api/review/${editingId}`, form);
+        await axios.patch(`/ api / review / ${editingId} `, form);
         setEditingId(null);
       } else {
         await axios.post('/api/review', form);
-        // Save user name for future reference
         localStorage.setItem('currentUserName', form.name);
         setCurrentUserName(form.name);
       }
 
       setForm({ name: '', message: '', rating: 5 });
-      setShowForm(false);
+      setIsFormOpen(false);
       fetchReviews();
     } catch (err) {
       console.error('Error submitting review:', err);
@@ -81,7 +78,7 @@ export default function ReviewsPage(): JSX.Element {
   const handleDelete = async (id: string): Promise<void> => {
     setDeleteLoadingId(id);
     try {
-      await axios.delete(`/api/review/${id}`);
+      await axios.delete(`/ api / review / ${id} `);
       fetchReviews();
     } catch (err) {
       console.error('Error deleting review:', err);
@@ -93,11 +90,10 @@ export default function ReviewsPage(): JSX.Element {
   const handleEdit = (r: Review): void => {
     setForm({ name: r.name, message: r.message, rating: r.rating });
     setEditingId(r._id);
-    setShowForm(true);
+    setIsFormOpen(true);
   };
 
   const canUserModify = (reviewName: string): boolean => {
-    // User can modify if they are the author or if no currentUserName is set (first time user)
     return !currentUserName || currentUserName === reviewName;
   };
 
@@ -106,232 +102,252 @@ export default function ReviewsPage(): JSX.Element {
     return (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1);
   };
 
-
-  const formatDate = (dateString: string): string => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
   const StarRating: React.FC<StarRatingProps> = ({ rating, interactive = false, size = 'text-xl', onRate }) => {
     return (
       <div className="flex items-center gap-1">
         {[1, 2, 3, 4, 5].map((num) => (
           <Star
             key={num}
-            size={size === 'text-xl' ? 20 : 16}
+            size={size === 'text-xl' ? 18 : 14}
             onClick={() => interactive && onRate && onRate(num)}
-            className={`${
-              interactive ? 'cursor-pointer hover:scale-110' : ''
-            } transition-all duration-200 ${
-              rating >= num 
-                ? 'text-yellow-400 fill-yellow-400' 
-                : 'text-gray-400'
-            }`}
+            className={`${interactive ? 'cursor-pointer hover:scale-110' : ''
+              } transition - all duration - 200 ${rating >= num
+                ? 'text-yellow-500 fill-yellow-500 drop-shadow-md'
+                : 'text-muted/20 fill-muted/20'
+              } `}
           />
         ))}
       </div>
     );
   };
 
+  // Masonry Layout Logic for 2 columns
+  const leftColumnReviews = reviews.filter((_, i) => i % 2 === 0);
+  const rightColumnReviews = reviews.filter((_, i) => i % 2 !== 0);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
-      <div className="max-w-6xl mx-auto mb-24 mt-10">
-        
+    <div className="min-h-screen bg-background relative selection:bg-yellow-500/30">
+
+      {/* Sophisticated Background */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-500/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/5 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 py-24 relative z-10">
+
         {/* Header Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mb-4">
-            <MessageCircle className="w-8 h-8 text-white" />
-          </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-4">
-            Customer Reviews
-          </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Discover what our clients say about their experience working with us
-          </p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="max-w-2xl"
+          >
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+              Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-amber-600">Stories</span>
+            </h1>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              Voices of those I've collaborated with. Real experiences, transparent feedback.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="flex gap-4 items-center"
+          >
+            <div className="text-right hidden md:block">
+              <div className="text-3xl font-bold">{getAverageRating()}</div>
+              <div className="text-sm text-muted-foreground">Average Rating</div>
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setIsFormOpen(true)}
+              className="bg-foreground text-background px-8 py-4 rounded-full font-bold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 group"
+            >
+              <Plus className="w-5 h-5 group-hover:rotate-90 transition-transform" />
+              Write Review
+            </motion.button>
+          </motion.div>
         </div>
 
-        {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 text-center">
-            <div className="text-4xl font-bold text-white mb-2">{reviews.length}</div>
-            <div className="text-gray-300">Total Reviews</div>
+        {/* Reviews Grid - Masonry */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          {/* Left Column */}
+          <div className="space-y-8">
+            {leftColumnReviews.map((review, idx) => (
+              <ReviewCard
+                key={review._id}
+                review={review}
+                idx={idx}
+                canModify={canUserModify(review.name)}
+                onEdit={() => handleEdit(review)}
+                onDelete={() => handleDelete(review._id)}
+                isDeleting={deleteLoadingId === review._id}
+              />
+            ))}
           </div>
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 text-center">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <span className="text-4xl font-bold text-white">{getAverageRating()}</span>
-              <Star className="w-8 h-8 text-yellow-400 fill-yellow-400" />
-            </div>
-            <div className="text-gray-300">Average Rating</div>
+
+          {/* Right Column */}
+          <div className="space-y-8 md:mt-20">
+            {rightColumnReviews.map((review, idx) => (
+              <ReviewCard
+                key={review._id}
+                review={review}
+                idx={idx}
+                canModify={canUserModify(review.name)}
+                onEdit={() => handleEdit(review)}
+                onDelete={() => handleDelete(review._id)}
+                isDeleting={deleteLoadingId === review._id}
+              />
+            ))}
           </div>
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 text-center">
-            <div className="text-4xl font-bold text-white mb-2">
-              {reviews.length > 0 ? Math.round((reviews.filter(r => r.rating >= 4).length / reviews.length) * 100) : 0}%
-            </div>
-            <div className="text-gray-300">Satisfaction Rate</div>
-          </div>
+
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Review Form Section */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-6">
-              <button
-                onClick={() => setShowForm(!showForm)}
-                className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-bold py-4 px-6 rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-105 mb-6"
-              >
-                {showForm ? 'Hide Form' : 'Write a Review'}
-              </button>
+        {reviews.length === 0 && (
+          <div className="text-center py-32 opacity-50">
+            <div className="text-2xl font-medium mb-2">No reviews yet</div>
+            <p>Be the first to leave your feedback.</p>
+          </div>
+        )}
 
-              {showForm && (
-                <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-2xl border border-white/20 space-y-4">
-                  <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                    <Edit3 className="w-6 h-6" />
-                    {editingId ? 'Edit Review' : 'New Review'}
-                  </h2>
+      </div>
 
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Name</label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                        <input
-                          type="text"
-                          placeholder="Your Name"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-400 border border-white/30 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/50 focus:outline-none transition-all duration-200"
-                          value={form.name}
-                          onChange={(e) => setForm({ ...form, name: e.target.value })}
+      {/* Review Modal Form */}
+      <AnimatePresence>
+        {isFormOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
+            onClick={() => setIsFormOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-card w-full max-w-lg rounded-3xl border border-border/40 shadow-2xl p-8 relative overflow-hidden"
+            >
+              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-500 to-amber-600" />
+
+              <h2 className="text-3xl font-bold mb-8 flex items-center gap-3">
+                {editingId ? 'Edit Review' : 'New Review'}
+              </h2>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 block">Your Name</label>
+                  <input
+                    className="w-full bg-secondary/50 border border-transparent focus:border-yellow-500/50 focus:bg-background rounded-xl px-4 py-3 outline-none transition-all font-medium"
+                    placeholder="e.g. Alex Chen"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  />
+                </div>
+
+                <div>
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 block">Rating</label>
+                  <div className="flex gap-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        onClick={() => setForm({ ...form, rating: star })}
+                        className="p-1 hover:scale-110 transition-transform"
+                      >
+                        <Star
+                          className={`w - 8 h - 8 ${star <= form.rating ? 'fill-yellow-500 text-yellow-500' : 'text-muted-foreground/30'} `}
                         />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Review</label>
-                      <textarea
-                        placeholder="Share your experience..."
-                        className="w-full px-4 py-3 rounded-xl bg-white/20 text-white placeholder-gray-400 border border-white/30 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/50 focus:outline-none transition-all duration-200 resize-none"
-                        rows={4}
-                        value={form.message}
-                        onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-gray-300 mb-2">Rating</label>
-                      <StarRating
-                        rating={form.rating}
-                        interactive={true}
-                        onRate={(rating: number) => setForm({ ...form, rating })}
-                      />
-                    </div>
-
-                    <button
-                      onClick={handleSubmit}
-                      disabled={loading || !form.name || !form.message}
-                      className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 disabled:from-gray-500 disabled:to-gray-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 disabled:scale-100 flex items-center justify-center gap-2"
-                    >
-                      {loading ? (
-                        <Loader2 className="animate-spin w-5 h-5" />
-                      ) : (
-                        <>
-                          {editingId ? 'Update Review' : 'Submit Review'}
-                          <TrendingUp className="w-5 h-5" />
-                        </>
-                      )}
-                    </button>
+                      </button>
+                    ))}
                   </div>
                 </div>
-              )}
-            </div>
-          </div>
 
-          {/* Reviews List Section */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-bold text-white">All Reviews</h2>
-              <div className="text-gray-300">
-                {reviews.length} review{reviews.length !== 1 ? 's' : ''}
+                <div>
+                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-2 block">Feedback</label>
+                  <textarea
+                    className="w-full bg-secondary/50 border border-transparent focus:border-yellow-500/50 focus:bg-background rounded-xl px-4 py-3 outline-none transition-all font-medium min-h-[150px] resize-none"
+                    placeholder="Share your experience working with me..."
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  />
+                </div>
+
+                <div className="flex gap-4 pt-4">
+                  <button
+                    onClick={() => setIsFormOpen(false)}
+                    className="flex-1 py-4 rounded-xl font-bold bg-secondary hover:bg-secondary/80 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    disabled={loading || !form.name || !form.message}
+                    className="flex-1 py-4 rounded-xl font-bold bg-yellow-500 hover:bg-yellow-400 text-black shadow-lg hover:shadow-yellow-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                  >
+                    {loading ? <Loader2 className="animate-spin" /> : (editingId ? 'Update' : 'Post Review')}
+                  </button>
+                </div>
               </div>
-            </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
-            <div className="space-y-6">
-              {reviews.map((r: Review, index: number) => (
-                <div
-                  key={r._id}
-                  className="bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                  style={{
-                    animationDelay: `${index * 0.1}s`
-                  }}
-                >
-                  <div className="flex justify-between items-start mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                        <span className="text-white font-bold text-lg">
-                          {r.name.charAt(0).toUpperCase()}
-                        </span>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-white">{r.name}</h3>
-                        <div className="flex items-center gap-2 text-sm text-gray-300">
-                          <Calendar className="w-4 h-4" />
-                          {formatDate(r._createdAt || r.createdAt || new Date().toISOString())}
-                        </div>
-                      </div>
-                    </div>
-                    <StarRating rating={r.rating} />
-                  </div>
+function ReviewCard({ review, idx, canModify, onEdit, onDelete, isDeleting }: any) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: idx * 0.1, duration: 0.5 }}
+      className="group relative p-8 rounded-3xl bg-secondary/20 hover:bg-secondary/30 border border-white/5 hover:border-white/10 transition-all duration-300 backdrop-blur-sm"
+    >
+      {/* Quote Icon Background */}
+      <Quote className="absolute top-8 right-8 w-12 h-12 text-foreground/5 pointer-events-none" />
 
-                  <p className="text-gray-200 mb-4 leading-relaxed">{r.message}</p>
-
-                  <div className="flex gap-3">
-                    {canUserModify(r.name) && (
-                      <button
-                        className="px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 border border-white/30 text-white font-medium transition-all duration-200 flex items-center gap-2 hover:scale-105"
-                        onClick={() => handleEdit(r)}
-                      >
-                        <Edit3 className="w-4 h-4" />
-                        Edit
-                      </button>
-                    )}
-                    {canUserModify(r.name) && (
-                      <button
-                        className="px-4 py-2 rounded-xl bg-red-500/80 hover:bg-red-500 text-white font-medium transition-all duration-200 flex items-center gap-2 hover:scale-105"
-                        onClick={() => handleDelete(r._id)}
-                        disabled={deleteLoadingId === r._id}
-                      >
-                        {deleteLoadingId === r._id ? (
-                          <Loader2 className="animate-spin w-4 h-4" />
-                        ) : (
-                          <>
-                            <Trash2 className="w-4 h-4" />
-                            Delete
-                          </>
-                        )}
-                      </button>
-                    )}
-                    {!canUserModify(r.name) && (
-                      <div className="px-4 py-2 rounded-xl bg-gray-600/50 text-gray-400 text-sm">
-                        Only author can modify this review
-                      </div>
-                    )}
-                  </div>
-                </div>
+      <div className="flex items-start justify-between mb-6">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-500 to-amber-600 flex items-center justify-center text-xl font-bold text-white shadow-lg">
+            {review.name.charAt(0).toUpperCase()}
+          </div>
+          <div>
+            <h3 className="font-bold text-lg leading-tight">{review.name}</h3>
+            <div className="flex text-yellow-500 gap-0.5 mt-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} className={`w - 3.5 h - 3.5 ${i < review.rating ? 'fill-current' : 'text-muted-foreground/30'} `} />
               ))}
             </div>
-
-            {reviews.length === 0 && (
-              <div className="text-center py-12">
-                <MessageCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-300 mb-2">No reviews yet</h3>
-                <p className="text-gray-400">Be the first to share your experience!</p>
-              </div>
-            )}
           </div>
         </div>
       </div>
-    </div>
-  );
+
+      <p className="text-muted-foreground leading-relaxed text-lg mb-6">
+        "{review.message}"
+      </p>
+
+      <div className="flex justify-between items-end border-t border-white/5 pt-6">
+        <span className="text-xs font-medium uppercase tracking-widest text-muted-foreground/50">
+          {new Date(review._createdAt || review.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
+        </span>
+
+        {canModify && (
+          <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-300">
+            <button onClick={onEdit} className="p-2 hover:bg-background rounded-full transition-colors text-muted-foreground hover:text-foreground">
+              <Edit3 className="w-4 h-4" />
+            </button>
+            <button onClick={onDelete} disabled={isDeleting} className="p-2 hover:bg-red-500/10 rounded-full transition-colors text-muted-foreground hover:text-red-500">
+              {isDeleting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
+            </button>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  )
 }
