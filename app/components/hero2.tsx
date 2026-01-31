@@ -5,7 +5,6 @@ import React from 'react'
 import { FaArrowRight } from "react-icons/fa6"
 import Typewriter from 'typewriter-effect'
 import { motion } from 'framer-motion'
-import { useTheme } from 'next-themes'
 
 const Hero2 = () => {
   // const { theme } = useTheme()

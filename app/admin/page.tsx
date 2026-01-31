@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { Rocket, Box, Database, HelpCircle, ShieldCheck, Lock, ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
@@ -108,7 +107,7 @@ export default function AdminGuide() {
                 <ul className="list-disc pl-5 mt-2 space-y-1 text-sm text-muted-foreground/80">
                   <li><strong>Title:</strong> Skill name (e.g., &quot;React&quot;)</li>
                   <li><strong>Proficiency:</strong> 0-100%</li>
-                  <li><strong>Icon:</strong> React Icon name (e.g., "FaReact")</li>
+                  <li><strong>Icon:</strong> React Icon name (e.g., &quot;FaReact&quot;)</li>
                   <li><strong>Order:</strong> Appearance order</li>
                 </ul>
               </li>
