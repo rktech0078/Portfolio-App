@@ -1,24 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Octokit } from 'octokit';
 import { client } from '@/sanity/lib/client';
-import crypto from 'crypto';
-
-// Setup Octokit
-const octokit = new Octokit({
-    auth: process.env.GITHUB_ACCESS_TOKEN,
-});
-
-// Verify Webhook Signature
-async function verifySignature(req: NextRequest, secret: string) {
-    const signature = req.headers.get('x-hub-signature-256');
-    if (!signature) return false;
-
-    const body = await req.text();
-    const hmac = crypto.createHmac('sha256', secret);
-    const digest = 'sha256=' + hmac.update(body).digest('hex');
-
-    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(digest));
-}
 
 export async function POST(req: NextRequest) {
     try {
@@ -122,8 +103,8 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Project Created', id: projectData._id });
         }
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Webhook Error:', error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
 }
