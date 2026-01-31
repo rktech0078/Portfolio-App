@@ -14,5 +14,5 @@ export async function getSkills() {
 }
 
 export async function getProjects() {
-  return client.fetch(`*[_type == "project"] | order(order asc)`)
+  return client.fetch(`*[_type == "project"] | order(order asc)`, {}, { cache: 'no-store' })
 }
