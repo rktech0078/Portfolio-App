@@ -1,4 +1,4 @@
-# 🚀 Portfolio App
+# 🚀 Abdul Rafay Khan Portfolio App
 
 A modern, full-stack portfolio web application built with [Next.js](https://nextjs.org/), [Sanity.io](https://www.sanity.io/), and [Tailwind CSS](https://tailwindcss.com/). Showcase your projects, skills, and receive client reviews with a beautiful, responsive UI.
 
