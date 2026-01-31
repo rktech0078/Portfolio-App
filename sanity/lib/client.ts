@@ -6,6 +6,7 @@ export const client = createClient({
   dataset,
   projectId,
   useCdn,
+  token: process.env.SANITY_WRITE_TOKEN, // Added token for write permissions
 })
 
 export async function getSkills() {
