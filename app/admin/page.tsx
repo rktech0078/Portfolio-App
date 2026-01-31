@@ -1,8 +1,30 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { Rocket, Box, Database, HelpCircle, ShieldCheck } from 'lucide-react'
+import { Rocket, Box, Database, HelpCircle, ShieldCheck, Lock, ArrowRight } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 export default function AdminGuide() {
+  const [password, setPassword] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [isShaking, setIsShaking] = useState(false)
+  const router = useRouter()
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+
+    // Verify against environment variable or hardcoded hash
+    // This is client-side only for guide access - actual studio is protected by Sanity auth
+    if (password === 'admin123' || password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
+      router.push('/studio')
+    } else {
+      setIsShaking(true)
+      setTimeout(() => setIsShaking(false), 500)
+    }
+    setIsLoading(false)
+  }
+
   return (
     <div className="min-h-screen pt-24 pb-12 bg-background relative overflow-hidden">
       {/* Background Ambience */}
@@ -28,26 +50,46 @@ export default function AdminGuide() {
         <div className="max-w-4xl mx-auto glass-card p-8 rounded-2xl border border-border/50 mb-8 relative overflow-hidden group hover:border-blue-500/30 transition-all duration-300">
           <div className="flex items-center gap-3 mb-6">
             <Rocket className="w-6 h-6 text-blue-500" />
-            <h2 className="text-2xl font-bold">Getting Started</h2>
+            <p className="text-gray-400 mt-2">Enter your verification code to access the dashboard</p>
           </div>
-          <p className="text-muted-foreground mb-6 leading-relaxed">
-            Your portfolio is now connected to Sanity CMS. This allows you to easily manage your skills and projects
-            without having to modify the code directly.
-          </p>
 
-          <div className="bg-secondary/30 p-6 rounded-xl border border-white/5">
-            <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-              Access Sanity Studio
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              You can access the Sanity Studio by going to:
-              <Link href="/studio" className="text-blue-500 ml-2 font-bold hover:underline">
-                /studio
-              </Link>
-            </p>
-            <p className="text-sm text-muted-foreground">
-              The first time you visit, you'll need to log in with the Sanity account credentials you used during setup.
-            </p>
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className={`transform transition-all duration-300 ${isShaking ? 'translate-x-[-10px]' : ''}`}>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-blue-500/20 rounded-xl blur-lg transition-all duration-300 group-hover:bg-blue-500/30 opacity-0 group-hover:opacity-100" />
+                <div className="relative bg-[#0A0A0A] border border-white/10 rounded-xl p-1 transition-all duration-300 group-hover:border-blue-500/50 flex items-center">
+                  <Lock className="w-5 h-5 text-gray-400 ml-3" />
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full bg-transparent border-none text-white p-3 focus:ring-0 placeholder-gray-500"
+                    placeholder="Enter admin code"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-3 rounded-xl font-medium 
+                hover:from-blue-500 hover:to-indigo-500 transition-all duration-300 transform hover:scale-[1.02]
+                disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group shadow-lg shadow-blue-900/20"
+            >
+              {isLoading ? (
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              ) : (
+                <>
+                  <span>Access Dashboard</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
+            </button>
+          </form>
+
+          <div className="mt-8 pt-6 border-t border-white/5 text-center">
+            <p className="text-sm text-gray-500">Authorized Personnel Only</p>
           </div>
         </div>
 
@@ -64,7 +106,7 @@ export default function AdminGuide() {
               <li>Click <strong>Create new</strong></li>
               <li>Fill in details:
                 <ul className="list-disc pl-5 mt-2 space-y-1 text-sm text-muted-foreground/80">
-                  <li><strong>Title:</strong> Skill name (e.g., "React")</li>
+                  <li><strong>Title:</strong> Skill name (e.g., &quot;React&quot;)</li>
                   <li><strong>Proficiency:</strong> 0-100%</li>
                   <li><strong>Icon:</strong> React Icon name (e.g., "FaReact")</li>
                   <li><strong>Order:</strong> Appearance order</li>

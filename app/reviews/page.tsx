@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { client } from '../../sanity/lib/sanity';
 import axios from 'axios';
-import { Loader2, Star, Edit3, Trash2, MessageCircle, User, Calendar, TrendingUp, Sparkles, Quote, Plus } from 'lucide-react';
+import { Loader2, Star, Edit3, Trash2, Quote, Plus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Review {
@@ -20,12 +20,7 @@ interface ReviewForm {
   rating: number;
 }
 
-interface StarRatingProps {
-  rating: number;
-  interactive?: boolean;
-  size?: string;
-  onRate?: (rating: number) => void;
-}
+// Removing unused StarRatingProps and component if not used
 
 export default function ReviewsPage(): JSX.Element {
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -57,7 +52,7 @@ export default function ReviewsPage(): JSX.Element {
 
     try {
       if (editingId) {
-        await axios.patch(`/ api / review / ${editingId} `, form);
+        await axios.patch(`/api/review/${editingId}`, form);
         setEditingId(null);
       } else {
         await axios.post('/api/review', form);
@@ -78,7 +73,7 @@ export default function ReviewsPage(): JSX.Element {
   const handleDelete = async (id: string): Promise<void> => {
     setDeleteLoadingId(id);
     try {
-      await axios.delete(`/ api / review / ${id} `);
+      await axios.delete(`/api/review/${id}`);
       fetchReviews();
     } catch (err) {
       console.error('Error deleting review:', err);
@@ -102,24 +97,7 @@ export default function ReviewsPage(): JSX.Element {
     return (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1);
   };
 
-  const StarRating: React.FC<StarRatingProps> = ({ rating, interactive = false, size = 'text-xl', onRate }) => {
-    return (
-      <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((num) => (
-          <Star
-            key={num}
-            size={size === 'text-xl' ? 18 : 14}
-            onClick={() => interactive && onRate && onRate(num)}
-            className={`${interactive ? 'cursor-pointer hover:scale-110' : ''
-              } transition - all duration - 200 ${rating >= num
-                ? 'text-yellow-500 fill-yellow-500 drop-shadow-md'
-                : 'text-muted/20 fill-muted/20'
-              } `}
-          />
-        ))}
-      </div>
-    );
-  };
+  // Removed unused StarRating component
 
   // Masonry Layout Logic for 2 columns
   const leftColumnReviews = reviews.filter((_, i) => i % 2 === 0);
@@ -147,9 +125,12 @@ export default function ReviewsPage(): JSX.Element {
               Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-amber-600">Stories</span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Voices of those I've collaborated with. Real experiences, transparent feedback.
+              Voices of those I&apos;ve collaborated with. Real experiences, transparent feedback.
             </p>
           </motion.div>
+
+          {/* ... */}
+          {/* ... rest of the code is largely same, just fixing specific errors ... */}
 
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -260,7 +241,7 @@ export default function ReviewsPage(): JSX.Element {
                         className="p-1 hover:scale-110 transition-transform"
                       >
                         <Star
-                          className={`w - 8 h - 8 ${star <= form.rating ? 'fill-yellow-500 text-yellow-500' : 'text-muted-foreground/30'} `}
+                          className={`w-8 h-8 ${star <= form.rating ? 'fill-yellow-500 text-yellow-500' : 'text-muted-foreground/30'}`}
                         />
                       </button>
                     ))}
@@ -301,7 +282,16 @@ export default function ReviewsPage(): JSX.Element {
   );
 }
 
-function ReviewCard({ review, idx, canModify, onEdit, onDelete, isDeleting }: any) {
+interface ReviewCardProps {
+  review: Review;
+  idx: number;
+  canModify: boolean;
+  onEdit: () => void;
+  onDelete: () => void;
+  isDeleting: boolean;
+}
+
+function ReviewCard({ review, idx, canModify, onEdit, onDelete, isDeleting }: ReviewCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -321,7 +311,7 @@ function ReviewCard({ review, idx, canModify, onEdit, onDelete, isDeleting }: an
             <h3 className="font-bold text-lg leading-tight">{review.name}</h3>
             <div className="flex text-yellow-500 gap-0.5 mt-1">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className={`w - 3.5 h - 3.5 ${i < review.rating ? 'fill-current' : 'text-muted-foreground/30'} `} />
+                <Star key={i} className={`w-3.5 h-3.5 ${i < review.rating ? 'fill-current' : 'text-muted-foreground/30'}`} />
               ))}
             </div>
           </div>
@@ -329,7 +319,7 @@ function ReviewCard({ review, idx, canModify, onEdit, onDelete, isDeleting }: an
       </div>
 
       <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-        "{review.message}"
+        &quot;{review.message}&quot;
       </p>
 
       <div className="flex justify-between items-end border-t border-white/5 pt-6">

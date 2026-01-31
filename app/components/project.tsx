@@ -7,7 +7,7 @@ import { getProjects } from '@/sanity/lib/client'
 import { urlForImage } from '@/sanity/lib/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
-import { FiExternalLink, FiGithub } from "react-icons/fi"
+import { FiExternalLink } from "react-icons/fi"
 
 type Project = {
   _id: string;

@@ -8,7 +8,7 @@ import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
 
 const Hero2 = () => {
-  const { theme } = useTheme()
+  // const { theme } = useTheme()
 
   return (
     <section id='home' className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">

@@ -10,7 +10,7 @@ const Contact = () => {
             Get in <span className="text-yellow-500">Touch</span>
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            Have a project in mind or just want to say hi? I'd love to hear from you.
+            Have a project in mind or just want to say hi? I&apos;d love to hear from you.
           </p>
         </div>
 
